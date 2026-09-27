@@ -15,19 +15,10 @@ data/          -> ham sozluk verisi (db.json, words.json) -- scraper burayi besl
 scraper/       -> Tureng.com'u tarayip data/ altina yazan scriptler
 converters/
   kobo/        -> data/ icindeki db.json'i Kobo sozluk paketine cevirir
-dist/          -> kuruma hazir, bitmis sozluk paketleri (dicthtml-en-tr.zip vb.)
+  koreader/    -> ayni db.json'i StarDict paketine cevirir (KOReader native destekler)
+  kindle/      -> ayni db.json'dan Kindle icin .opf+.xhtml KAYNAGI uretir (derleme icin kindlegen gerekir, bkz. asagi)
+dist/          -> kuruma hazir, bitmis sozluk paketleri
 ```
-
-Ileride `converters/koreader/` ve `converters/kindle/` eklenecek; ayni
-`data/db.json` farkli cikti formatlarina cevrilebilecek.
-
-## Veri
-
-`data/db.json` (246.479 baslik, ~98 MB) ve `data/words.json` boyutlari
-yuzunden repoda tutulmuyor; **[Releases](https://github.com/Okbaydere/ereader-en-tr-dictionary/releases)**
-sayfasindan indirip `data/` altina koyun. Kendi verinizi uretmek isterseniz
-asagidaki akis sifirdan da calisir (bos `data/` ile baslayip bir kelime
-listesi ile besleyerek).
 
 ## Akis
 
@@ -45,6 +36,29 @@ listesi ile besleyerek).
    sozluk formatina (`dicthtml-*.zip`, gzip'li HTML parcalari + marisa-trie
    indeks) cevirir. `lemminflect` ile cekimli formlari (`ran` -> `run`)
    uretip ayni girise yonlendirir.
+4. **`converters/koreader/tureng_stardict.py`** — `data/db.json`'i
+   **StarDict** formatina cevirir (`.ifo`/`.idx`/`.dict`/`.syn`, zip'lenmis).
+   KOReader bu formati kendi ici destekler, harici bir arac gerekmez.
+   Cikti klasoru `koreader/data/dict/` altina kopyalanir. Cekimli formlar
+   `.syn` dosyasi uzerinden ana kelimeye yonlendirilir.
+5. **`converters/kindle/tureng_kindle.py`** — `data/db.json`'dan Kindle
+   sozluk formati icin **kaynak** dosyalari (`.opf` + parcali `.xhtml`,
+   `idx:entry`/`idx:orth`/`idx:infl` etiketleriyle) uretir. Bu script
+   `.mobi` UretMEZ — son adim olarak `kindlegen dictionary.opf` ile
+   derlenmesi gerekir. Amazon kindlegen'i ayri dagitmiyor; **Kindle
+   Previewer 3**'un icine gomulu geliyor (Amazon'un sitesinden ucretsiz
+   indirilir, kurulum klasorunde `.../lib/fc/bin/kindlegen` yolunda durur).
+
+Ileride farkli cikti formatlari eklenebilir; ayni `data/db.json` her formatin
+kaynagi olarak kullanilir.
+
+## Veri
+
+`data/db.json` (246.479 baslik, ~98 MB) ve `data/words.json` boyutlari
+yuzunden repoda tutulmuyor; **[Releases](https://github.com/Okbaydere/ereader-en-tr-dictionary/releases)**
+sayfasindan indirip `data/` altina koyun. Kendi verinizi uretmek isterseniz
+asagidaki akis sifirdan da calisir (bos `data/` ile baslayip bir kelime
+listesi ile besleyerek).
 
 ## Kurulum
 
@@ -56,9 +70,6 @@ pip install -r requirements.txt
 
 ## Kullanim
 
-Script'ler veriyi repo yerlesiminde otomatik olarak `data/` altinda bulur
-yazar (o klasor yoksa calisma dizinini kullanir):
-
 ```fish
 cd scraper
 python3 tureng_dictionary_scraper.py     # ilk toplama turu (data/ altina yazar)
@@ -67,11 +78,20 @@ python3 tureng_phase2.py                 # words.json'a yeni basliklari ekle
 python3 tureng_dictionary_scraper.py     # yeni basliklari da cek
 
 cd ../converters/kobo
-python3 tureng_kobo.py ../../dist/dicthtml-en-tr.zip
+python3 tureng_kobo.py ../../data/db.json dicthtml-en-tr.zip
+
+cd ../koreader
+python3 tureng_stardict.py ../../data/db.json stardict-en-tr
+
+cd ../kindle
+python3 tureng_kindle.py ../../data/db.json kindle-en-tr-src
 ```
 
-Uretilen `dicthtml-en-tr.zip` dosyasini Kobo'ya `.kobo/dict/` altina atmak
-yeterli. Cikti adini vermezsen `dicthtml-en.zip` uzere calisma dizinine yazilir.
+- **Kobo**: uretilen `dicthtml-en-tr.zip` dosyasini `.kobo/dict/` altina atmak yeterli.
+- **KOReader**: `stardict-en-tr.zip` icindeki `stardict-en-tr/` klasorunu
+  `koreader/data/dict/` altina kopyala.
+- **Kindle**: `kindle-en-tr-src/` icindeki `dictionary.opf`'i kindlegen ile
+  derle, ciktiyi Kindle'a `documents/dictionaries/` altina at.
 
 ## Icerik
 
@@ -83,7 +103,9 @@ yeterli. Cikti adini vermezsen `dicthtml-en.zip` uzere calisma dizinine yazilir.
 - Kelime turu dagilimi: %58 isim, %27 sifat, %8 fiil, %4 zarf, kalani
   unlem/zamir/baglac ve turu isaretsiz girisler.
 - Anlamlarin **~%10'unda** (70.813) Tureng'in kendi orneginden gelen
-  Ingilizce-Turkce ornek cumle cifti var.
+  Ingilizce-Turkce ornek cumle cifti var. (Tatoeba/TED2020 ile
+  zenginlestirilmis, ornek cumlesi cok daha yuksek oranli ikinci bir surum
+  de hazirladim -- bkz. Notlar.)
 - Her kelime icin en fazla 7 anlam tutuluyor (Tureng'in kategori sirasina
   gore secilerek); ornekli anlamlar oncelikli, kalan slotlar orneksiz
   anlamlarla dolduruluyor.
@@ -92,7 +114,13 @@ yeterli. Cikti adini vermezsen `dicthtml-en.zip` uzere calisma dizinine yazilir.
 
 - Sozluk verisi (`data/`) ve bitmis paketler (`dist/`) Tureng.com'dan
   derlenmistir; kisisel/egitim amacli kullanim icin paylasilmaktadir.
-
+- Ornek cumle zenginlestirme (Tatoeba/TED2020 birlestirme, POS bazli
+  eslestirme) ayri bir asama olup bu repoya henuz eklenmedi.
+- Kindle kaynagi (`converters/kindle/`) sadece XML iyi-bicimlilik acisindan
+  test edildi; kindlegen'in kendisiyle derlenip Kindle'da calisip
+  calismadigi henuz dogrulanmadi. Derleme sirasinda hata alirsan
+  (ozellikle cok sayida cekim/inflection ile ilgili limitler bilinen bir
+  sorun) issue acabilirsin.
 
 ## Lisans
 
