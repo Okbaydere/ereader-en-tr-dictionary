@@ -52,6 +52,21 @@ dist/          -> kuruma hazir, bitmis sozluk paketleri
 Ileride farkli cikti formatlari eklenebilir; ayni `data/db.json` her formatin
 kaynagi olarak kullanilir.
 
+## Hazir paketler ve kurulum
+
+Kodla ugrasmak istemeyenler icin `dist/` altinda (ve
+[Releases](https://github.com/Okbaydere/ereader-en-tr-dictionary/releases)
+sayfasinda) kurula hazir paketler var. Cihazina gore:
+
+| Cihaz | Paket | Nereye atilir |
+|---|---|---|
+| **Kobo** | `dicthtml-en-tr.zip` | USB ile bagla -> `.kobo/dict/` -> cihazi yeniden baslat |
+| **KOReader** | `stardict-en-tr.zip` | icindeki `stardict-en-tr/` klasorunu `koreader/data/dict/` altina kopyala |
+| **Kindle** | `dictionary.mobi` | USB ile bagla -> `documents/dictionaries/` -> Ayarlar'dan sozluk olarak sec |
+
+Not: Kobo'da yerlesik Ingilizce sozlugu korumak istersen, zip'i
+`dicthtml-fr.zip` adiyla koy (sadece Fransizca-dilli kitaplarda devreye girer).
+
 ## Veri
 
 `data/db.json` (246.479 baslik, ~98 MB) ve `data/words.json` boyutlari
