@@ -64,8 +64,6 @@ sayfasinda) kurula hazir paketler var. Cihazina gore:
 | **KOReader** | `stardict-en-tr.zip` | icindeki `stardict-en-tr/` klasorunu `koreader/data/dict/` altina kopyala |
 | **Kindle** | `dictionary.mobi` | USB ile bagla -> `documents/dictionaries/` -> Ayarlar'dan sozluk olarak sec |
 
-Not: Kobo'da yerlesik Ingilizce sozlugu korumak istersen, zip'i
-`dicthtml-fr.zip` adiyla koy (sadece Fransizca-dilli kitaplarda devreye girer).
 
 ## Veri
 
