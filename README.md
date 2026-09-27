@@ -101,8 +101,7 @@ python3 tureng_kindle.py ../../data/db.json kindle-en-tr-src
 - **Kobo**: uretilen `dicthtml-en-tr.zip` dosyasini `.kobo/dict/` altina atmak yeterli.
 - **KOReader**: `stardict-en-tr.zip` icindeki `stardict-en-tr/` klasorunu
   `koreader/data/dict/` altina kopyala.
-- **Kindle**: `kindle-en-tr-src/` icindeki `dictionary.opf`'i kindlegen ile
-  derle, ciktiyi Kindle'a `documents/dictionaries/` altina at.
+- **Kindle**: `dictionary.mobi` dosyasını, Kindle'da `documents/dictionaries/` altina at.
 
 ## Icerik
 
