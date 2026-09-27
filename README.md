@@ -118,9 +118,7 @@ python3 tureng_kindle.py ../../data/db.json kindle-en-tr-src
 - Kelime turu dagilimi: %58 isim, %27 sifat, %8 fiil, %4 zarf, kalani
   unlem/zamir/baglac ve turu isaretsiz girisler.
 - Anlamlarin **~%10'unda** (70.813) Tureng'in kendi orneginden gelen
-  Ingilizce-Turkce ornek cumle cifti var. (Tatoeba/TED2020 ile
-  zenginlestirilmis, ornek cumlesi cok daha yuksek oranli ikinci bir surum
-  de hazirladim -- bkz. Notlar.)
+  Ingilizce-Turkce ornek cumle cifti var
 - Her kelime icin en fazla 7 anlam tutuluyor (Tureng'in kategori sirasina
   gore secilerek); ornekli anlamlar oncelikli, kalan slotlar orneksiz
   anlamlarla dolduruluyor.
@@ -129,8 +127,6 @@ python3 tureng_kindle.py ../../data/db.json kindle-en-tr-src
 
 - Sozluk verisi (`data/`) ve bitmis paketler (`dist/`) Tureng.com'dan
   derlenmistir; kisisel/egitim amacli kullanim icin paylasilmaktadir.
-- Ornek cumle zenginlestirme (Tatoeba/TED2020 birlestirme, POS bazli
-  eslestirme) ayri bir asama olup bu repoya henuz eklenmedi.
 - Kindle kaynagi (`converters/kindle/`) sadece XML iyi-bicimlilik acisindan
   test edildi; kindlegen'in kendisiyle derlenip Kindle'da calisip
   calismadigi henuz dogrulanmadi. Derleme sirasinda hata alirsan
