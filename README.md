@@ -1,8 +1,6 @@
 # ereader-en-tr-dictionary
 
-E-okurlar (Kobo, ileride KOReader ve Kindle) icin, Tureng.com verisinden
-derlenen acik kaynakli Ingilizce-Turkce sozluk. Cihazlarin fabrika cikisi
-gelen en-tr sozlukleri zayif/eksik oldugu icin hazirlandi.
+E-okurlar (Kobo, KOReader ve Kindle) için, Tureng.com verisinden derlenen açık kaynaklı İngilizce-Türkçe sözlük.
 
 Hazir sozluk paketini indirip kurmak icin `dist/` klasorune bakman yeterli --
 kod ve scriptlerle ugrasmana gerek yok. Kendi veri setinden farkli bir cift
