@@ -122,11 +122,7 @@ python3 tureng_kindle.py ../../data/db.json kindle-en-tr-src
 
 - Sozluk verisi (`data/`) ve bitmis paketler (`dist/`) Tureng.com'dan
   derlenmistir; kisisel/egitim amacli kullanim icin paylasilmaktadir.
-- Kindle kaynagi (`converters/kindle/`) sadece XML iyi-bicimlilik acisindan
-  test edildi; kindlegen'in kendisiyle derlenip Kindle'da calisip
-  calismadigi henuz dogrulanmadi. Derleme sirasinda hata alirsan
-  (ozellikle cok sayida cekim/inflection ile ilgili limitler bilinen bir
-  sorun) issue acabilirsin.
+- dictionary.mobi kindlegen ile başarıyla derlendi; format hatasız üretildi, ancak gerçek bir Kindle cihazında sözlük araması (özellikle çekimli form eşleştirmesi) henüz doğrulanmadı. Test eden olursa geri bildirim çok değerli olur.
 
 ## Lisans
 
