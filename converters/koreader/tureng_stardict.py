@@ -12,7 +12,9 @@ Format referansi: https://raw.githubusercontent.com/huzheng001/stardict-3/master
 import html
 import json
 import os
+import shutil
 import struct
+import subprocess
 import sys
 import zipfile
 from datetime import date
@@ -142,8 +144,19 @@ def main():
         f.write(ifo)
     with open(f'{out_name}/{out_name}.idx', 'wb') as f:
         f.write(idx_blob)
-    with open(f'{out_name}/{out_name}.dict', 'wb') as f:
+    dict_path = f'{out_name}/{out_name}.dict'
+    with open(dict_path, 'wb') as f:
         f.write(dict_blob)
+
+    # dictzip varsa .dict'i .dict.dz'ye sıkıştır (KOReader ikisini de okur,
+    # .dict.dz ~%75-80 daha küçük olur, kurulumu kolaylaştırır)
+    dz_ok = False
+    if shutil.which('dictzip'):
+        r = subprocess.run(['dictzip', '-f', dict_path], capture_output=True)
+        # dictzip -f orijinali kendisi siler (gzip gibi); ayrıca silmeye gerek yok
+        if r.returncode == 0 and os.path.exists(dict_path + '.dz'):
+            dz_ok = True
+
     if lemma_map:
         with open(f'{out_name}/{out_name}.syn', 'wb') as f:
             f.write(syn_blob)
@@ -154,7 +167,8 @@ def main():
             z.write(f'{out_name}/{fn}', arcname=f'{out_name}/{fn}')
 
     print(f'[✓] {zip_path}: {len(words_sorted):,} başlık | {len(lemma_map):,} çekim (syn) | '
-          f'{len(dict_blob)/1e6:.1f} MB dict | {len(idx_blob)/1e6:.1f} MB idx')
+          f'{"dict.dz sıkıştırılmış" if dz_ok else "dict SIKIŞTIRILMADI (dictzip bulunamadı)"} | '
+          f'{len(idx_blob)/1e6:.1f} MB idx')
     print(f'    KOReader\'a kurmak için: {zip_path} içindeki "{out_name}/" klasörünü '
           f'koreader/data/dict/ altına kopyala.')
 
