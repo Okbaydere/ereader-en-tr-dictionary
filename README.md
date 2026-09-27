@@ -21,6 +21,14 @@ dist/          -> kuruma hazir, bitmis sozluk paketleri (dicthtml-en-tr.zip vb.)
 Ileride `converters/koreader/` ve `converters/kindle/` eklenecek; ayni
 `data/db.json` farkli cikti formatlarina cevrilebilecek.
 
+## Veri
+
+`data/db.json` (246.479 baslik, ~98 MB) ve `data/words.json` boyutlari
+yuzunden repoda tutulmuyor; **[Releases](https://github.com/Okbaydere/ereader-en-tr-dictionary/releases)**
+sayfasindan indirip `data/` altina koyun. Kendi verinizi uretmek isterseniz
+asagidaki akis sifirdan da calisir (bos `data/` ile baslayip bir kelime
+listesi ile besleyerek).
+
 ## Akis
 
 1. **`scraper/tureng_dictionary_scraper.py`** — `data/words.json` icindeki

@@ -5,13 +5,13 @@ phase2_queried.json
 *.journal
 *.journal.applied
 
-# db.json ve words.json KASITLI OLARAK ignore edilmiyor -- data/ altina
-# konup repoya dahil ediliyor. dist/ altindaki .zip paketleri de oyle.
+# Ham veri dosyalari repoya dahil edilmiyor; GitHub Releases'tan indirilip
+# data/ altina konur (bkz. README "Veri" bolumu).
+data/db.json
+data/words.json
 
 # Python
 __pycache__/
 *.pyc
 .venv/
 venv/
-data/db.json
-data/words.json
