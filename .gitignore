@@ -1,0 +1,17 @@
+# Ara durum dosyalari (scraper kaldigi yerden devam etmek icin kullanir,
+# paylasmaya deger degil)
+completed.json
+phase2_queried.json
+*.journal
+*.journal.applied
+
+# db.json ve words.json KASITLI OLARAK ignore edilmiyor -- data/ altina
+# konup repoya dahil ediliyor. dist/ altindaki .zip paketleri de oyle.
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+data/db.json
+data/words.json

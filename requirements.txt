@@ -1,0 +1,4 @@
+curl_cffi
+lxml
+marisa-trie
+lemminflect
